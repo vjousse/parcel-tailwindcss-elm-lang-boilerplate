@@ -3,11 +3,13 @@ module Gen.Pages exposing (Model, Msg, init, subscriptions, update, view)
 import Browser.Navigation exposing (Key)
 import Effect exposing (Effect)
 import ElmSpa.Page
+import Gen.Params.Home_
 import Gen.Params.NotFound
 import Gen.Model as Model
 import Gen.Msg as Msg
 import Gen.Route as Route exposing (Route)
 import Page exposing (Page)
+import Pages.Home_
 import Pages.NotFound
 import Request exposing (Request)
 import Shared
@@ -27,6 +29,9 @@ type alias Msg =
 init : Route -> Shared.Model -> Url -> Key -> ( Model, Effect Msg )
 init route =
     case route of
+        Route.Home_ ->
+            pages.home_.init ()
+    
         Route.NotFound ->
             pages.notFound.init ()
 
@@ -36,6 +41,8 @@ update msg_ model_ =
     case ( msg_, model_ ) of
     
 
+        _ ->
+            \_ _ _ -> ( model_, Effect.none )
 
 
 view : Model -> Shared.Model -> Url -> Key -> View Msg
@@ -43,6 +50,9 @@ view model_ =
     case model_ of
         Model.Redirecting_ ->
             \_ _ _ -> View.none
+    
+        Model.Home_ params ->
+            pages.home_.view params ()
     
         Model.NotFound params ->
             pages.notFound.view params ()
@@ -54,6 +64,9 @@ subscriptions model_ =
         Model.Redirecting_ ->
             \_ _ _ -> Sub.none
     
+        Model.Home_ params ->
+            pages.home_.subscriptions params ()
+    
         Model.NotFound params ->
             pages.notFound.subscriptions params ()
 
@@ -63,10 +76,12 @@ subscriptions model_ =
 
 
 pages :
-    { notFound : Static Gen.Params.NotFound.Params
+    { home_ : Static Gen.Params.Home_.Params
+    , notFound : Static Gen.Params.NotFound.Params
     }
 pages =
-    { notFound = static Pages.NotFound.view Model.NotFound
+    { home_ = static Pages.Home_.view Model.Home_
+    , notFound = static Pages.NotFound.view Model.NotFound
     }
 
 
