@@ -1,4 +1,5 @@
-# my new project
+# Parcel, Tailwind CSS and Elm Spa boilerplate
+
 > 🌳  built with [elm-spa](https://elm-spa.dev)
 
 ## dependencies
