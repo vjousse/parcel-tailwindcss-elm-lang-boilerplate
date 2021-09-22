@@ -1,6 +1,6 @@
 module.exports = {
   purge: [
-    './elm/**/*.elm',
+    './src/**/*.elm',
     './js/app.js',
     './html/index.html',
     './css/styles.css',
