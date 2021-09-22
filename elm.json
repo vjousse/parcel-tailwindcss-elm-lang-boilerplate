@@ -1,10 +1,6 @@
 {
     "type": "application",
-    "source-directories": [
-        "src",
-        ".elm-spa/defaults",
-        ".elm-spa/generated"
-    ],
+    "source-directories": ["elm", ".elm-spa/defaults", ".elm-spa/generated"],
     "elm-version": "0.19.1",
     "dependencies": {
         "direct": {
