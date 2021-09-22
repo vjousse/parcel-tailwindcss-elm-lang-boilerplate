@@ -2,13 +2,27 @@
   "name": "my-program",
   "version": "1.0.0",
   "scripts": {
-    "start": "parcel html/index.html",
-    "build": "parcel build html/index.html"
+    "start": "npm install && npm run build:dev && npm run dev",
+    "test": "elm-test",
+    "test:watch": "elm-test --watch",
+    "build": "run-s build:elm-spa build:elm",
+    "build:dev": "run-s build:elm-spa build:dev:elm",
+    "dev": "run-p dev:elm-spa dev:elm",
+    "build:elm": "parcel build html/index.html",
+    "build:dev:elm": "elm make elm/Main.elm --debug --output=public/dist/elm.compiled.js || true",
+    "build:elm-spa": "elm-spa build .",
+    "dev:elm": "parcel html/index.html",
+    "dev:elm-spa": "chokidar elm/ -c \"npm run build:elm-spa\""
   },
+
   "devDependencies": {
     "@parcel/transformer-elm": "^2.0.0-rc.0",
     "autoprefixer": "^10.3.5",
+    "chokidar-cli": "^3.0.0",
     "elm": "^0.19.1-5",
+    "elm-spa": "^6.0.4",
+    "elm-test": "^0.19.1-revision7",
+    "npm-run-all": "^4.1.5",
     "parcel": "latest",
     "postcss": "^8.3.7",
     "tailwindcss": "^2.2.15"
