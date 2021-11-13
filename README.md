@@ -8,7 +8,7 @@ The corresponding blog post can be found [on my blog: Using Parcel JS with Tailw
 
 ## Running DEV env
 
-    npm run dev
+    npm run start
 
 ## Building
 
